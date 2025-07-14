@@ -6,6 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { SuparbikeModule } from './module/suparbike/suparbike.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -17,6 +18,8 @@ import { SuparbikeModule } from './module/suparbike/suparbike.module';
     CarModule,
 
     SuparbikeModule,
+
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
