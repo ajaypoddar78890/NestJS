@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Get, Put, Param } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Get,
+  Put,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { Team } from './Schema/teams.schema';
 import { TeamsService } from './teams.service';
 
@@ -18,5 +26,12 @@ export class TeamsController {
   @Put(':id')
   async updateTeam(@Param('id') id: string, @Body() body: any): Promise<Team> {
     return await this.teamsService.updateTeam(id, body);
+  }
+
+  @Delete(':id')
+  async deleteTeam(
+    @Param('id') id: string,
+  ): Promise<{ message: string; data: Team }> {
+    return await this.teamsService.deleteTeam(id);
   }
 }
