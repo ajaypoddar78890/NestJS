@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from './schema/user,schema';
@@ -20,8 +21,8 @@ export class UserController {
   }
 
   @Get()
-  async findAll(): Promise<User[]> {
-    return await this.userService.getAllUsers();
+  async findAll(@Query() query: any): Promise<User[]> {
+    return await this.userService.getAllUsers(query);
   }
 
   @Put(':id')
@@ -33,5 +34,10 @@ export class UserController {
     @Param('id') id: string,
   ): Promise<{ message: string; data: User }> {
     return await this.userService.deleteUser(id);
+  }
+
+  @Get('search')
+  async search(@Query() query: any): Promise<User[]> {
+    return await this.userService.searchUsers(query);
   }
 }

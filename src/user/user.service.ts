@@ -24,8 +24,10 @@ export class UserService {
     return await newUser.save();
   }
 
-  async getAllUsers(): Promise<User[]> {
-    return this.userModel.find().exec();
+  async getAllUsers(query: any = {}): Promise<User[]> {
+    const users = await this.userModel.find(query).exec();
+    console.log(users); // This will print the full array of user objects
+    return users;
   }
 
   async findByUserId(userID: string, data: any): Promise<User[]> {
@@ -43,5 +45,9 @@ export class UserService {
       message: 'User deleted successfully',
       data: deletedUser,
     };
+  }
+
+  async searchUsers(query: any): Promise<User[]> {
+    return this.userModel.find(query).exec();
   }
 }
